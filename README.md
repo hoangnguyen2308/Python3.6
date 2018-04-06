@@ -1,21 +1,22 @@
-# Python3.6
-install opencv3..4 Python3.6 -Raspberry Pi3 
+# install opencv3..4 Python3.6 -Raspberry Pi3 
 1. Raspberry Pi 3 B +
 Raspbian Stretch, version March 2018 
 2. Install Python3.6
-# install Python 3.6
-wget https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tar.xz
-tar xf Python-3.6.2.tar.xz
-cd Python-3.6.2
-./configure --enable-optimizations
-make
-sudo make altinstall
-rm Python-3.6.2.tar.xz
+
+$wget https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tar.xz
+$tar xf Python-3.6.2.tar.xz
+$cd Python-3.6.2
+$./configure --enable-optimizations
+$make
+$sudo make altinstall
+$rm Python-3.6.2.tar.xz
+--
 3. Expand filesystem
 $ sudo raspi-config
-And then select the “Advanced Options” menu item
-Select “Expand filesystem”
-and reboot pi
+
+--And then select the “Advanced Options” menu item
+--Select “Expand filesystem”
+--and reboot pi
 $ sudo reboot
 
 4. Install dependencies
@@ -28,20 +29,21 @@ $ sudo apt-get install libgtk2.0-dev libgtk-3-dev
 $ sudo apt-get install libatlas-base-dev gfortran
 
 5. Download OpenCV3.4 source code 
-cd ~
-wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.4.0.zip
-unzip opencv.zip
-wget -O opencv_contrib.zip https://github.com/Itseez/opencv_contrib/archive/3.4.0.zip
-unzip opencv_contrib.zip
+$cd ~
+$wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.4.0.zip
+$unzip opencv.zip
+$wget -O opencv_contrib.zip https://github.com/Itseez/opencv_contrib/archive/3.4.0.zip
+$unzip opencv_contrib.zip
 
 6. Install virtualenv and virtualenvwrapper
-sudo pip3.6 install virtualenv virtualenvwrapper
+$sudo pip3.6 install virtualenv virtualenvwrapper
 $ sudo rm -rf ~/.cache/pip
 
 7. Update profile for virtualenv and virtualenvwrapper
-# virtualenv and virtualenvwrapper
+-- virtualenv and virtualenvwrapper
 $ export WORKON_HOME=$HOME/.virtualenvs
 $source /usr/local/bin/virtualenvwrapper.sh
+
 8. Create Python3.6 on virtual environment 
 $ source ~/.profile
 $ mkvirtualenv cv -p python3.6
@@ -63,25 +65,20 @@ $sudo pip3.6 install dev
 $ cd ~/opencv-3.4.0/
 $ mkdir build
 $ cd build
-$ cmake -D CMAKE_BUILD_TYPE=RELEASE \
-    -D CMAKE_INSTALL_PREFIX=/usr/local \
-    -D INSTALL_PYTHON_EXAMPLES=ON \
-    -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib-3.4.0/modules \
-    -D BUILD_EXAMPLES=ON ..
+$ cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D INSTALL_PYTHON_EXAMPLES=ON  -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib-3.4.0/modules  -D BUILD_EXAMPLES=ON 
  
 
 12. Swap Space size before compiling to add more virtual memory 
 $sudo nano /etc/dphys-swapfile
 --open and edit CONF_SWAPSIZE, change it 
-# set size to absolute value, leaving empty (default) then uses computed value
-# you most likely don't want this, unless you have an special disk situation
-# CONF_SWAPSIZE=100
+
+--# CONF_SWAPSIZE=100
 CONF_SWAPSIZE=1024
 
 -- save it and exit
 -- test
 $sudo /etc/init.d/dphys-swapfile stop
-£sudo /etc/init.d/dphys-swapfile start
+$sudo /etc/init.d/dphys-swapfile start
 
 13. Finally ready to be Compile
 
@@ -104,14 +101,18 @@ $python3.6
 >>>import cv2
 
 17. Change your SWAPSIZE back 
-# set size to absolute value, leaving empty (default) then uses computed value
-#   you most likely don't want this, unless you have an special disk situation
+
 CONF_SWAPSIZE=100
-# CONF_SWAPSIZE=1024
+--# CONF_SWAPSIZE=1024
 
 $ sudo /etc/init.d/dphys-swapfile stop
 $ sudo /etc/init.d/dphys-swapfile start
 
+18. Clean up your house-- make sure cv2 already installed 
+$ cd ~
+$ rm -rf opencv-3.4.0 opencv_contrib-3.4.0
+$ rm opencv.zip opencv_contrib.zip
 
+# Good luck
 
 

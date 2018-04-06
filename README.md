@@ -1,4 +1,4 @@
-# install opencv3..4 Python3.6 -Raspberry Pi3 
+# install opencv3.4 Python3.6 -Raspberry Pi3 
 1. Raspberry Pi 3 B +
 Raspbian Stretch, version March 2018 
 2. Install Python3.6
